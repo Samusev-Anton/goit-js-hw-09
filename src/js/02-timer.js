@@ -5,7 +5,7 @@ const startButton = document.querySelector('button');
 const timeNow = Date.now();
 let chooseDate = 0;
 const timeSpans = document.querySelectorAll('.value');
-console.log(timeSpans);
+startButton.disabled = true;
 
 
 const fp = flatpickr("#datetime-picker", {
@@ -15,26 +15,31 @@ const fp = flatpickr("#datetime-picker", {
     minuteIncrement: 1,
     onClose(selectedDates) {
         console.log(selectedDates[0]);
+            chooseDate = fp.selectedDates[0].getTime();
+
+            if (chooseDate < timeNow) {
+        alert('"Please choose a date in the future"');
+        return;
+        };
+    startButton.disabled = false;
+
     }
     
 });
 
 
 startButton.addEventListener('click', () => {
-    chooseDate = fp.selectedDates[0].getTime();
     
-    if (chooseDate < timeNow) {
-        alert('"Please choose a date in the future"');
-        return;
-    }
 
     setInterval(() => {
         overTime = chooseDate - Date.now();
         // const objOverTime = convertMs(overTime);
         // console.log('over', objOverTime);
-            const { days, hours, minutes, seconds } = convertMs(overTime);
-    timeSpans[0].textContent = `${ seconds }`;
-
+        const { days, hours, minutes, seconds } = convertMs(overTime);
+        timeSpans[0].textContent = `${days}`;
+        timeSpans[1].textContent = `${hours}`;
+        timeSpans[2].textContent = `${minutes}`;
+        timeSpans[3].textContent = `${seconds}`;
     }, 1000);
 
 });
