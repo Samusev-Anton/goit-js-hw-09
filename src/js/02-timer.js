@@ -34,7 +34,7 @@ startButton.addEventListener('click', () => {
     
 
     setInterval(() => {
-        overTime = chooseDate - Date.now();
+       let overTime = chooseDate - Date.now();
         // const objOverTime = convertMs(overTime);
         // console.log('over', objOverTime);
         const { days, hours, minutes, seconds } = convertMs(overTime);
