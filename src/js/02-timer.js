@@ -1,5 +1,6 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
 
 const startButton = document.querySelector('button');
 const timeNow = Date.now();
@@ -17,8 +18,9 @@ const fp = flatpickr("#datetime-picker", {
         console.log(selectedDates[0]);
             chooseDate = fp.selectedDates[0].getTime();
 
-            if (chooseDate < timeNow) {
-        alert('"Please choose a date in the future"');
+        if (chooseDate < timeNow) {
+                Notiflix.Notify.failure('"Please choose a date in the future"');
+        // alert('"Please choose a date in the future"');
         return;
         };
     startButton.disabled = false;
@@ -43,10 +45,6 @@ startButton.addEventListener('click', () => {
     }, 1000);
 
 });
-// function updateClokeFace({ days, hours, minutes, seconds }) {
-//         timeSpans.textContent[0] = `${ seconds }`;
-
-// }
 
 function pad(value) {
     return String(value).padStart(2, '0');
