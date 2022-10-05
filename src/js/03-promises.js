@@ -26,7 +26,13 @@ function onBtnSubmit(event) {
   
    let startDelay = Number(delay.value);
   const amountNum = Number(amount.value);
-let stepDelay = Number(step.value);
+  let stepDelay = Number(step.value);
+  if (startDelay < 0 || amountNum < 0 || stepDelay < 0) {
+     Notiflix.Notify.failure(
+          `Значение не может быть отрицательным`
+     );
+    return;
+  }
 
 
  for (let i = 0; i < amountNum; i += 1) {
